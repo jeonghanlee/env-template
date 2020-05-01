@@ -22,15 +22,8 @@
 
 TOP:=$(CURDIR)
 ifneq (1,$(words $(TOP)))
-$(info >>> -------------------------------------------------- <<<)
-$(info >>>  Containing whitespace in                          <<<)
-$(info > $(TOP))
-$(info >>>  We are using the relative path.                   <<<)
-$(info >>>  Thus, it works only within a physical TOP path.   <<<)
-$(info >>> -------------------------------------------------- <<<)
 TOP:=.
 endif
-
 
 include $(TOP)/configure/CONFIG
 include $(TOP)/configure/RULES
