@@ -14,12 +14,23 @@
 #  You should have received a copy of the GNU General Public License along with
 #  this program. If not, see https://www.gnu.org/licenses/gpl-2.0.txt
 #
-# 
+#
 # Author  : Jeong Han Lee
 # email   : JeongLee@lbl.gov
-# Date    : Thursday, April 23 19:00:42 PDT 2020
-# version : 0.0.1
+# Date    : Friday, May  1 14:41:59 PDT 2020
+# version : 0.0.2
 
 TOP:=$(CURDIR)
+ifneq (1,$(words $(TOP)))
+$(info >>> -------------------------------------------------- <<<)
+$(info >>>  Containing whitespace in                          <<<)
+$(info > $(TOP))
+$(info >>>  We are using the relative path.                   <<<)
+$(info >>>  Thus, it works only within a physical TOP path.   <<<)
+$(info >>> -------------------------------------------------- <<<)
+TOP:=.
+endif
+
+
 include $(TOP)/configure/CONFIG
 include $(TOP)/configure/RULES
