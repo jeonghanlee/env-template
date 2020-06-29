@@ -1,16 +1,18 @@
 
+APPNAME:=env-template
+
 ## Where the Source repository SRC_URL/SRC_NAME
 ##
-SRC_URL:=https://github.com/ControlSystemStudio
-SRC_NAME:=phoebus
+SRC_URL:=https://github.com/jeonghanlee
+SRC_NAME:=${env-template}
 
 
 ## Which the source tag / branch / hash id would like to use
 ## 2020-04-21
-SRC_TAG:=0ef703a
+SRC_TAG:=master
 
 ## Placeholder for the site-specific version control 
-SRC_VERSION:=04212020
+SRC_VERSION:=master
 
 
 -include $(TOP)/../RELEASE.local

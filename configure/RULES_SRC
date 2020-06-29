@@ -49,12 +49,14 @@ endif
 .PHONY: build conf
 
 ## Build Source
-build: 
-	$(QUIET)mvn -f $(SRC_PATH)/pom.xml clean install
+build:
+	echo "mvn $(MVN_OPTS) -f $(SRC_PATH) clean install -Dmaven.test.skip=true"
+	$(QUIET) mvn $(MVN_OPTS) -f $(SRC_PATH) clean install -Dmaven.test.skip=true
 
 ## Copy the site specific files into sources
 conf:
-	$(QUIET)sed -e "s:_KEYSTORE_:$(KEYSTORE_FILENAME):g" -e "s:_CFLDIF_:$(CFLDIF_FILENAME):g" < $(SITE_TEMPLATE_PATH)/application.properties.in > $(SITE_TEMPLATE_PATH)/application.properties
-	$(QUIET)cp $(SITE_TEMPLATE_PATH)/$(CFLDIF_FILENAME)     $(SITE_SPECIFIC_FILES_PATH)/
-	$(QUIET)cp $(SITE_TEMPLATE_PATH)/$(KEYSTORE_FILENAME)   $(SITE_SPECIFIC_FILES_PATH)/keystore/
+	$(QUIET)sed -e "s:_KEYSTORE_:$(KEYSTORE_FILENAME):g" \
+		    -e "s:_CFLDIF_:$(CFLDIF_FILENAME):g" \
+		    < $(SITE_TEMPLATE_PATH)/application.properties.in \
+		    > $(SITE_TEMPLATE_PATH)/application.properties
 	$(QUIET)cp $(SITE_TEMPLATE_PATH)/application.properties $(SITE_SPECIFIC_FILES_PATH)/
