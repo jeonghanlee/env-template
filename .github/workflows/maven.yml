@@ -25,11 +25,5 @@ jobs:
         echo $PATH
         mvn --version
     - run: sudo apt-get install make tree git 
-    - run: |
-        make init
-        make vars
-        make conf
-    - run: |
-        make build
-        make install
+    - run: make vars
     - run: make exist
