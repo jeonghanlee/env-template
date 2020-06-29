@@ -2,6 +2,8 @@ VARS_EXCLUDES+=.SHELLSTATUS
 VARS_EXCLUDES+=INIT_SRC
 VARS_EXCLUDES+=SITE_SPECIFIC_FILES_PATH
 
+LEVEL?=1
+
 FILTER?=1
 
 ifeq "$(FILTER)" "1"
@@ -35,6 +37,12 @@ print-%:
 	$(QUIET)echo $*\'s origin is $(origin $*)
 
 FORCE:
+
+
+.PHONY : exist
+
+exist:
+	$(if $(wildcard $(INSTALL_LOCATION)), tree -aL $(LEVEL) $(INSTALL_LOCATION), $(QUIET)echo "No $(INSTALL_LOCATION)")
 
 
 VARS_EXCLUDES+=FILTER
