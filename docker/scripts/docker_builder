@@ -21,7 +21,6 @@ SRC_TOP=${SC_TOP}/../../
 
 pushd ${SRC_TOP}
 
-echo "docker build --network=host --file docker/Dockerfile -t jeonghanlee/channelfinder:${LOGDATE} --build-arg CF_PORT_HTTP=${CF_PORT} ."
+echo "docker build --network=host --file docker/Dockerfile -t ${LOGDATE} --build-arg CF_PORT_HTTP=${CF_PORT} ."
 
 popd
-
