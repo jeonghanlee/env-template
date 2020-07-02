@@ -48,4 +48,10 @@ else
 	$(if $(wildcard $(INSTALL_LOCATION)), tree -aL $(LEVEL) $(INSTALL_LOCATION), $(QUIET)echo "No $(INSTALL_LOCATION)")
 endif
 
+
+.DELETE_ON_ERROR:
+
+.NOTPARALLEL:
+
+
 VARS_EXCLUDES+=FILTER
