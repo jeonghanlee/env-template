@@ -15,11 +15,7 @@ SUDO_CMD := $(shell which sudo)
 # So we have to remove -E option as well if we would like to use devtoolset
 #
 ifeq "$(SUDO_INFO)" "1"
-ifneq (,$(findstring devtoolset,$(SUDO_CMD)))
 SUDO = $(SUDO_CMD)
-else
-SUDO = $(SUDO_CMD) -E
-endif
 SUDOBASH := $(SUDO) bash -c
 else
 SUDO :=
