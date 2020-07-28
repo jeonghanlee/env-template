@@ -3,7 +3,7 @@
 INSTALL:= install
 INSTALL_PROGRAM:=$(INSTALL)
 INSTALL_DATA:=$(INSTALL) -m 644
-
+INSTALL_755:=$(INSTALL) -m 755
 
 # IF INSTALL_LOCATIOIN is not WRITABLE, SUDO and SUDOBASH should be used 
 # SUDO_INFO 1 : SUDO is needed (NOT writable)
@@ -16,23 +16,12 @@ SUDO_CMD := $(shell which sudo)
 #
 ifeq "$(SUDO_INFO)" "1"
 SUDO = $(SUDO_CMD)
-SUDOBASH := $(SUDO) bash -c
+SUDOBASH := $(SUDO) -E bash -c
 else
 SUDO :=
 SUDOBASH = bash -c
 endif
 
-#
-#
-# SRC_PATH_INFO 1 : the directory is not there
-# SRC_PATH_INFO 0 : the directory is there
-SRC_PATH_INFO := $(shell test -d $(SRC_PATH) 1>&2 2> /dev/null; echo $$?)
-#
-#
-ifeq "$(SRC_PATH_INFO)" "1"
-INIT_SRC = 1
-endif
-#
 #
 SITE_TEMPLATE_PATH:=$(TOP)/site-template
 #
@@ -42,6 +31,8 @@ VARS_EXCLUDES+=INSTALL
 VARS_EXCLUDES+=INSTALL_PROGRAM
 VARS_EXCLUDES+=INSTALL_DATA
 VARS_EXCLUDES+=SUDOBASH
+VARS_EXCLUDES+=INSTALL_755
+
 
 
 

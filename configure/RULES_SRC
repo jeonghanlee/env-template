@@ -27,24 +27,12 @@ default: help
 
 ## Clone Source
 init:
-ifeq "$(INIT_SRC)" "1"
-	git clone $(SRC_GITURL) $(SRC_PATH)
-	cd $(SRC_PATH) && git checkout $(SRC_TAG)
-else
-	$(QUIET)echo "$(SRC_PATH) exists. make distclean first, if one would like to restart it."
-endif
+	$(call gitclone,$(SRC_GITURL),$(SRC_PATH),$(SRC_TAG))
 
 deinit: distclean
 ## Clean Source
 distclean:
-ifneq ($(wildcard $(SRC_PATH)/.*),)
-	$(QUIET)echo "We've found $(SRC_PATH)"
-	$(QUIET)echo "Removing ....."
-	$(QUIET)rm -rf $(SRC_PATH)
-else
-	$(QUIET)echo "There is no $(SRC_PATH)."
-endif
-
+	$(call distclean, $(SRC_PATH))
 
 .PHONY: build conf
 
