@@ -7,6 +7,7 @@ VARS_EXCLUDES+=$(filter JAR_%, $(.VARIABLES))
 
 LEVEL?=1
 FILTER?=1
+LSOPTS?="-lta"
 
 ifeq "$(FILTER)" "1"
 SRC_VARIABLES:=$(sort $(filter-out $(VARS_EXCLUDES) VARS_EXCLUDES,$(.VARIABLES)))
@@ -36,6 +37,12 @@ PRINT.%:
 print-%:
 	$(QUIET)echo $* = $($*)
 	$(QUIET)echo $*\'s origin is $(origin $*)
+
+ls.%:
+	$(QUIET) ls $(LSOPTS) $($*)
+
+tree.%:
+	$(QUIET) tree -aL $(LEVEL) $($*)
 
 FORCE:
 
