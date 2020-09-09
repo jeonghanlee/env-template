@@ -11,7 +11,13 @@ INSTALL_755:=$(INSTALL) -m 755
 # There is no simple way to detect whether SUDO is needed to create INSTALL_LOCATION"
 # test -w $(INSTALL_LOCATION) is wrong, if the directory doesn't exsit.
 # So, test -w $(INSTALL_LOCATION)/.. is a bit better solution.
+# There is only one exception when INSTALL_LOCATION = HOME.
+ifeq "$(INSTALL_LOCATION)" "${HOME}"
+SUDO_INFO := $(shell test -w $(INSTALL_LOCATION) 1>&2 2> /dev/null; echo $$?)
+else
 SUDO_INFO := $(shell test -w $(INSTALL_LOCATION)/.. 1>&2 2> /dev/null; echo $$?)
+endif
+
 SUDO_CMD := $(shell which sudo)
 
 # For CentOS, devtoolset-{7,8} has -E option within sudo shell
