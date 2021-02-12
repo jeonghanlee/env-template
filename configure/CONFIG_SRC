@@ -25,10 +25,12 @@ SUDO_CMD := $(shell which sudo)
 #
 ifeq "$(SUDO_INFO)" "1"
 SUDO = $(SUDO_CMD)
-SUDOBASH := $(SUDO) -E bash -c
+else
+ifeq ($(UNAME_S),Darwin)
+SUDO = $(SUDO_CMD)
 else
 SUDO :=
-SUDOBASH = bash -c
+endif
 endif
 
 #
