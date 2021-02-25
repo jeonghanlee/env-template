@@ -39,7 +39,7 @@ distclean:
 ## Build Source
 build:
 	echo "mvn $(MVN_OPTS) -f $(SRC_PATH) clean install -Dmaven.test.skip=true"
-	$(QUIET) mvn $(MVN_OPTS) -f $(SRC_PATH) clean install -Dmaven.test.skip=true
+	$(QUIET) JAVA_HOME=$(JAVA_HOME) $(MAVEN_CMD) $(MVN_OPTS) -f $(SRC_PATH) clean install -Dmaven.test.skip=true
 
 ## Copy the site specific files into sources
 conf:
