@@ -1,8 +1,8 @@
-
-
-.PHONY: install uninstall src_install
+.PHONY: install uninstall src_install src_uninstall
 
 install: src_install sd_install sd_enable
+uninstall: src_uninstall
+
 
 src_install: src_version src_preinst
 	$(if $(wildcard $(INSTALL_LOCATION)), $(QUIET)$(SUDO) mv $(INSTALL_LOCATION) $(INSTALL_LOCATION)_backup_$$(date +%Y%m%d-%H%M%S))
@@ -11,12 +11,12 @@ src_install: src_version src_preinst
 	$(QUIET)$(SUDO) cp -rp $(SRC_PATH)/appserver/distributions/payara/target/stage/payara5/*  $(INSTALL_LOCATION)/
 	$(QUIET)$(SUDO)	chown -R $(USERID):$(GROUPID) $(INSTALL_LOCATION)
 
-uninstall: sd_stop sd_disable sd_clean src_postrm
+src_uninstall: sd_stop sd_disable sd_clean src_postrm src_version_clean
 	$(QUIET)echo "Removing $(INSTALL_LOCATION)..."
 	$(QUIET)$(SUDO) rm -rf $(INSTALL_LOCATION)/
 
 
-.PHONY: src_version src_preinst src_postrm clean
+.PHONY: src_version src_preinst src_postrm src_version_clean
 
 src_preinst:
 	$(QUIET)$(SUDO) bash $(SITE_TEMPLATE_PATH)/usergroup.postinst "configure" "$(USERID)" "$(GROUPID)"
@@ -31,7 +31,7 @@ src_version: FORCE
 	$(QUIET)echo "- SRC GIT  VERSION : "               >> $(SITE_TEMPLATE_PATH)/.versions
 	$(QUIET)cd $(SRC_PATH) && git describe --tags      >> $(SITE_TEMPLATE_PATH)/.versions
 
-clean:
+src_version_clean:
 	rm -rf $(SITE_TEMPLATE_PATH)/.versions
 
 FORCE:
