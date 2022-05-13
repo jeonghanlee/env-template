@@ -43,7 +43,7 @@ OS_VERSION:=$(strip $(shell grep -Po '^VERSION_ID=\K[^d].+' /etc/os-release | se
 OS_NAME:=$(strip $(shell grep -Po '^ID=\K[^S].+' /etc/os-release | sed 's/\"//g'))
 endif
 
-
+APPNAME_ROOT_LOGGER_LEVEL:=
 #
 SITE_TEMPLATE_PATH:=$(TOP)/site-template
 #
