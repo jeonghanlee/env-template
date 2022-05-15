@@ -47,4 +47,6 @@ auto_positions.sav*
 .versions
 *-src
 env-template/
-.DS_Store
+site-template/*.bash
+site-template/*.conf
+site-template/systemd/*.service
