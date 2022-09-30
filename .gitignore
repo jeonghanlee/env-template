@@ -7,3 +7,4 @@ info_tags_ioc
 *.pyc
 conf.py
 *~
+.DS_Store
